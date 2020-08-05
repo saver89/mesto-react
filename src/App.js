@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <div class="container">
+      <div className="container">
         <Header />
         <Main
           onEditProfile={handleEditProfileClick}
@@ -46,37 +46,37 @@ function App() {
         isOpened={isEditProfileOpen}
         onClose={closeAllPopups}
       >
-        <fieldset class="popup__fieldset">
-          <label class="popup__form-field">
+        <fieldset className="popup__fieldset">
+          <label className="popup__form-field">
             <input
-              class="popup__input"
+              className="popup__input"
               id="input-edit-name"
               name="name"
               type="text"
               placeholder="Имя"
-              minlength="2"
-              maxlength="40"
+              minLength="2"
+              maxLength="40"
               required
               pattern="[A-Za-zА-Яа-я\s\-]{1,}"
             />
             <span
-              class="popup__input-error popup__input-error_active"
+              className="popup__input-error popup__input-error_active"
               id="input-edit-name-error"
             ></span>
           </label>
-          <label class="popup__form-field">
+          <label className="popup__form-field">
             <input
-              class="popup__input"
+              className="popup__input"
               id="input-edit-position"
               name="about"
               type="text"
               placeholder="Род занятий"
-              minlength="2"
-              maxlength="200"
+              minLength="2"
+              maxLength="200"
               required
             />
             <span
-              class="popup__input-error popup__input-error_active"
+              className="popup__input-error popup__input-error_active"
               id="input-edit-position-error"
             ></span>
           </label>
@@ -89,28 +89,28 @@ function App() {
         isOpened={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
-        <fieldset class="popup__fieldset">
-          <label class="popup__form-field">
+        <fieldset className="popup__fieldset">
+          <label className="popup__form-field">
             <input
-              class="popup__input"
+              className="popup__input"
               name="name"
               type="text"
               placeholder="Название"
-              minlength="1"
-              maxlength="30"
+              minLength="1"
+              maxLength="30"
               required
             />
-            <span class="popup__input-error"></span>
+            <span className="popup__input-error"></span>
           </label>
-          <label class="popup__form-field">
+          <label className="popup__form-field">
             <input
-              class="popup__input"
+              className="popup__input"
               name="link"
               type="url"
               placeholder="Ссылка на картинку"
               required
             />
-            <span class="popup__input-error"></span>
+            <span className="popup__input-error"></span>
           </label>
         </fieldset>
       </PopupWithForm>
@@ -121,35 +121,20 @@ function App() {
         isOpened={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
-        <fieldset class="popup__fieldset">
-          <label class="popup__form-field">
+        <fieldset className="popup__fieldset">
+          <label className="popup__form-field">
             <input
-              class="popup__input"
+              className="popup__input"
               name="link"
               type="url"
               placeholder="Ссылка на аватар"
               required
             />
-            <span class="popup__input-error"></span>
+            <span className="popup__input-error"></span>
           </label>
         </fieldset>
       </PopupWithForm>
-      <PopupWithForm name="confirm-form" title="Вы уверены" closeText="Да"></PopupWithForm>
-      <template id="card-template">
-        <figure class="element">
-          <div class="element__image-container">
-            <img class="element__image" src="#" alt="" />
-          </div>
-          <div class="element__info-container">
-            <h2 class="element__name">#</h2>
-            <div class="element__like-container">
-              <button class="element__like" type="button" aria-label="Нравится"></button>
-              <p class="element__like-counter">0</p>
-            </div>
-          </div>
-          <button class="element__remove" aria-label="Удалить"></button>
-        </figure>
-      </template>
+      <PopupWithForm name="confirm-form" title="Вы уверены" closeText="Да"></PopupWithForm>      
     </div>
   );
 }
