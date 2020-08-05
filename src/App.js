@@ -1,42 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Main from './components/Main';
 
 function App() {
   return (
     <div className="App">
       <div class="container">
-        <header class="header">
-          <a class="header__logo"></a>
-        </header>
-        <main class="main">
-          <section class="profile">
-            <div class="profile__avatar-container">
-              <img class="profile__avatar" src="#" alt="Аватар пользователя" />
-              <div class="profile__avatar-layout">
-                <button class="profile__avatar-edit"></button>
-              </div>
-            </div>
-            <div class="profile__info-container">
-              <div class="profile__info">
-                <div class="profile__name-container">
-                  <h1 class="profile__name"></h1>
-                  <button
-                    class="profile__edit-button"
-                    type="button"
-                    aria-label="Редактировать профиль"
-                  ></button>
-                </div>
-                <p class="profile__position"></p>
-              </div>
-            </div>
-            <button class="profile__add-button" type="button" aria-label="Добавить"></button>
-          </section>
-          <section class="elements"></section>
-        </main>
-        <footer class="footer">
-          <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
-        </footer>
+        <Header />
+        <Main />
+        <Footer />
       </div>
       <div class="popup popup_edit-form">
         <div class="popup__container">
