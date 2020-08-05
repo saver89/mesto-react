@@ -4,28 +4,35 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Main from './components/Main';
 import PopupWithForm from './components/PopupWithForm';
+import ImagePopup from './components/ImagePopup';
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState();
 
-  function handleEditProfileClick(evt) {
+  function handleEditProfileClick() {
     setIsEditProfileOpen(true);
   }
 
-  function handleAddPlaceClick(evt) {
+  function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
   }
 
-  function handleEditAvatarClick(evt) {
+  function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
   }
 
-  function closeAllPopups(evt) {
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
+
+  function closeAllPopups() {
     setIsEditProfileOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
+    setSelectedCard(null);
   }
 
   return (
@@ -36,6 +43,7 @@ function App() {
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
         />
         <Footer />
       </div>
@@ -134,7 +142,8 @@ function App() {
           </label>
         </fieldset>
       </PopupWithForm>
-      <PopupWithForm name="confirm-form" title="Вы уверены" closeText="Да"></PopupWithForm>      
+      <PopupWithForm name="confirm-form" title="Вы уверены" closeText="Да" onClose={closeAllPopups}></PopupWithForm>
+      <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
     </div>
   );
 }
