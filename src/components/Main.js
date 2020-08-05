@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../utils/Api';
+import Card from './Card';
 
 function Main(props) {
   const [userName, setUserName] = useState();
@@ -22,7 +23,6 @@ function Main(props) {
       });
   }, []);
 
-  console.log(cards);
   return (
     <main className="main">
       <section className="profile">
@@ -55,19 +55,7 @@ function Main(props) {
       </section>
       <section className="elements">
         {cards.map((card) => (
-          <figure className="element" key={card._id}>
-            <div className="element__image-container">
-              <img className="element__image" src={card.link} alt="" />
-            </div>
-            <div className="element__info-container">
-              <h2 className="element__name">{card.name}</h2>
-              <div className="element__like-container">
-                <button className="element__like" type="button" aria-label="Нравится"></button>
-                <p className="element__like-counter">{card.likes.length}</p>
-              </div>
-            </div>
-            <button className="element__remove" aria-label="Удалить"></button>
-          </figure>
+          <Card card={card} key={card._id} />
         ))}
       </section>
     </main>
