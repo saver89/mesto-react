@@ -90,35 +90,7 @@ function App() {
           </label>
         </fieldset>
       </PopupWithForm>
-      
-      <div class="popup popup_image-preview">
-        <div class="popup__container">
-          <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
-          <div class="popup__content-container">
-            <figure class="popup__image-preview">
-              <img class="popup__image" src="#" alt="" />
-              <figcaption class="popup__image-name"></figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-      <div class="popup popup_confirm">
-        <div class="popup__container">
-          <button type="button" class="popup__close-button" aria-label="Закрыть"></button>
-          <form
-            class="popup__form-container"
-            name="confirm-form"
-            action="#"
-            method="GET"
-            novalidate
-          >
-            <legend class="popup__title">Вы уверены</legend>
-            <button type="submit" class="popup__submit-button">
-              Да
-            </button>
-          </form>
-        </div>
-      </div>
+      <PopupWithForm name="confirm-form" title="Вы уверены" closeText="Да"></PopupWithForm>      
       <template id="card-template">
         <figure class="element">
           <div class="element__image-container">
