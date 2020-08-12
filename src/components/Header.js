@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Header(props) {
+function Header() {
   return (
     <header className="header">
       <a className="header__logo" href="/"></a>
