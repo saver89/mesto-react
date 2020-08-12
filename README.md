@@ -4,4 +4,13 @@
 Отображение мест для путешествий, с отображений количества лайков каждого места.
 
 ### Технологии
-CSS, JS, HTML, React, Webpack
+- CSS, JS, HTML, 
+- React, 
+- Webpack
+
+### Команды
+- npm start - Запуск проекта в режиме разработчик
+- npm run deploy - Релиз проекта
+
+### Ссылка на проект
+https://saver89.github.io/mesto-react/
