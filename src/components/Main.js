@@ -1,33 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import api from '../utils/Api';
 import Card from './Card';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
-  const [userName, setUserName] = useState();
-  const [userDescription, setUserDescription] = useState();
-  const [userAvatar, setUserAvatar] = useState();
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
     api
-      .getUserInfo()
-      .then((res) => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-
-        return api.getInitialsCards();
-      })
+      .getInitialsCards()      
       .then((res) => {
         setCards(res);
       });
   }, []);
 
+  const currentUser = useContext(CurrentUserContext);
+
   return (
     <main className="main">
       <section className="profile">
         <div className="profile__avatar-container">
-          <img className="profile__avatar" src={userAvatar} alt="Аватар пользователя" />
+          <img className="profile__avatar" src={currentUser.avatar} alt="Аватар пользователя" />
           <div className="profile__avatar-layout">
             <button className="profile__avatar-edit" onClick={props.onEditAvatar}></button>
           </div>
@@ -35,7 +28,7 @@ function Main(props) {
         <div className="profile__info-container">
           <div className="profile__info">
             <div className="profile__name-container">
-              <h1 className="profile__name">{userName}</h1>
+              <h1 className="profile__name">{currentUser.name}</h1>
               <button
                 className="profile__edit-button"
                 type="button"
@@ -43,7 +36,7 @@ function Main(props) {
                 onClick={props.onEditProfile}
               ></button>
             </div>
-            <p className="profile__position">{userDescription}</p>
+            <p className="profile__position">{currentUser.about}</p>
           </div>
         </div>
         <button
