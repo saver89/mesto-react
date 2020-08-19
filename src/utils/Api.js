@@ -35,14 +35,14 @@ class Api {
     return this._fetchApi(`/cards/${cardId}`, "DELETE");
   }
 
-  likeCard(cardId) {
-    return this._fetchApi(`/cards/likes/${cardId}`, "PUT");
+  changeLikeCardStatus(cardId, likeStatus) {
+    if (likeStatus) {
+      return this._fetchApi(`/cards/likes/${cardId}`, "PUT");
+    } else {
+      return this._fetchApi(`/cards/likes/${cardId}`, "DELETE");  
+    }
   }
-
-  unlikeCard(cardId) {
-    return this._fetchApi(`/cards/likes/${cardId}`, "DELETE");
-  }
-
+  
   //Операции с данными пользователя
   getUserInfo() {
     return this._fetchApi("/users/me", "GET");
