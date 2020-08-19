@@ -16,6 +16,7 @@ function Main(props) {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
+<<<<<<< HEAD
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
@@ -26,6 +27,18 @@ function Main(props) {
       setCards(newCards);
     });
   }
+=======
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+        // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
+      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+      // Обновляем стейт
+      setCards(newCards);
+    });
+}
+>>>>>>> 490fb2cd2e63161bd0d05773630f1dcb0f04599a
 
   return (
     <main className="main">
@@ -59,12 +72,16 @@ function Main(props) {
       </section>
       <section className="elements">
         {cards.map((card) => (
+<<<<<<< HEAD
           <Card
             card={card}
             key={card._id}
             onCardClick={props.onCardClick}
             onCardLike={handleCardLike}
           />
+=======
+          <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={handleCardLike} />
+>>>>>>> 490fb2cd2e63161bd0d05773630f1dcb0f04599a
         ))}
       </section>
     </main>
