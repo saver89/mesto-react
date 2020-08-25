@@ -39,6 +39,13 @@ function App() {
     setSelectedCard(card);
   }
 
+  function closeAllPopups() {
+    setIsEditProfileOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setSelectedCard(null);
+  }
+  
   function handleUpdateUser(userInfo) {
     api
       .editUserInfo(userInfo)
@@ -48,6 +55,7 @@ function App() {
         updatedUser.about = userInfo.about;
 
         setCurrentUser({ ...updatedUser});
+        setIsEditProfileOpen(false);        
       })
       .catch((err) => {
         console.err(err);
@@ -60,18 +68,13 @@ function App() {
       .editAvatar(avatar)
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
+        setIsEditAvatarPopupOpen(false);
       })
       .catch((err) => {
         console.error(err);
       });
   }
 
-  function closeAllPopups() {
-    setIsEditProfileOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
-    setSelectedCard(null);
-  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
