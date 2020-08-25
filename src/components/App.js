@@ -8,6 +8,7 @@ import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EdifProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -106,26 +107,7 @@ function App() {
             </label>
           </fieldset>
         </PopupWithForm>
-        <PopupWithForm
-          name="update-avatar"
-          title="Обновить аватар"
-          closeText="Сохранить"
-          isOpened={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-        >
-          <fieldset className="popup__fieldset">
-            <label className="popup__form-field">
-              <input
-                className="popup__input"
-                name="link"
-                type="url"
-                placeholder="Ссылка на аватар"
-                required
-              />
-              <span className="popup__input-error"></span>
-            </label>
-          </fieldset>
-        </PopupWithForm>
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
         <PopupWithForm
           name="confirm-form"
           title="Вы уверены"
