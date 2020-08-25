@@ -24,6 +24,17 @@ function Main(props) {
       const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
       // Обновляем стейт
       setCards(newCards);
+    }).catch(err => {
+      console.log(err);
+    });
+  }
+
+  function handleCardDelete(card) {
+    api.removeCard(card._id).then(() => {
+      const newCards = cards.filter(c => c._id !== card._id);
+      setCards(newCards);
+    }).catch(err => {
+      console.log(err);
     });
   }
 
@@ -64,6 +75,7 @@ function Main(props) {
             key={card._id}
             onCardClick={props.onCardClick}
             onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
         ))}
       </section>
