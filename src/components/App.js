@@ -7,6 +7,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import isEditProfilePopup from './EdifProfilePopup';
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -57,49 +58,7 @@ function App() {
           />
           <Footer />
         </div>
-        <PopupWithForm
-          name="edit-form"
-          title="Редактировать профиль"
-          closeText="Сохранить"
-          isOpened={isEditProfileOpen}
-          onClose={closeAllPopups}
-        >
-          <fieldset className="popup__fieldset">
-            <label className="popup__form-field">
-              <input
-                className="popup__input"
-                id="input-edit-name"
-                name="name"
-                type="text"
-                placeholder="Имя"
-                minLength="2"
-                maxLength="40"
-                required
-                pattern="[A-Za-zА-Яа-я\s\-]{1,}"
-              />
-              <span
-                className="popup__input-error popup__input-error_active"
-                id="input-edit-name-error"
-              ></span>
-            </label>
-            <label className="popup__form-field">
-              <input
-                className="popup__input"
-                id="input-edit-position"
-                name="about"
-                type="text"
-                placeholder="Род занятий"
-                minLength="2"
-                maxLength="200"
-                required
-              />
-              <span
-                className="popup__input-error popup__input-error_active"
-                id="input-edit-position-error"
-              ></span>
-            </label>
-          </fieldset>
-        </PopupWithForm>
+        <isEditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups}/>
         <PopupWithForm
           name="add-form"
           title="Новое место"
