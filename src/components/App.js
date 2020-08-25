@@ -43,10 +43,26 @@ function App() {
     api
       .editUserInfo(userInfo)
       .then(() => {
-        setCurrentUser(userInfo);
+        const updatedUser = { ...currentUser };
+        updatedUser.name = userInfo.name;
+        updatedUser.about = userInfo.about;
+
+        setCurrentUser({ ...updatedUser});
       })
       .catch((err) => {
         console.err(err);
+      });
+  }
+
+  function handleUpdateAvatar({ avatar }) {
+    console.log(avatar);
+    api
+      .editAvatar(avatar)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -107,7 +123,11 @@ function App() {
             </label>
           </fieldset>
         </PopupWithForm>
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
         <PopupWithForm
           name="confirm-form"
           title="Вы уверены"
