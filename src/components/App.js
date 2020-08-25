@@ -38,6 +38,17 @@ function App() {
     setSelectedCard(card);
   }
 
+  function handleUpdateUser(userInfo) {
+    api
+      .editUserInfo(userInfo)
+      .then(() => {
+        setCurrentUser(userInfo);
+      })
+      .catch((err) => {
+        console.err(err);
+      });
+  }
+
   function closeAllPopups() {
     setIsEditProfileOpen(false);
     setIsAddPlacePopupOpen(false);
@@ -58,7 +69,11 @@ function App() {
           />
           <Footer />
         </div>
-        <EditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups}/>
+        <EditProfilePopup
+          isOpen={isEditProfileOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
         <PopupWithForm
           name="add-form"
           title="Новое место"

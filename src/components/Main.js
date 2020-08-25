@@ -9,6 +9,8 @@ function Main(props) {
   useEffect(() => {
     api.getInitialsCards().then((res) => {
       setCards(res);
+    }).catch(err => {
+      console.error(err);
     });
   }, []);
 
@@ -25,7 +27,7 @@ function Main(props) {
       // Обновляем стейт
       setCards(newCards);
     }).catch(err => {
-      console.log(err);
+      console.error(err);
     });
   }
 
@@ -34,7 +36,7 @@ function Main(props) {
       const newCards = cards.filter(c => c._id !== card._id);
       setCards(newCards);
     }).catch(err => {
-      console.log(err);
+      console.error(err);
     });
   }
 
