@@ -7,7 +7,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import isEditProfilePopup from './EdifProfilePopup';
+import EditProfilePopup from './EdifProfilePopup';
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -58,7 +58,7 @@ function App() {
           />
           <Footer />
         </div>
-        <isEditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups}/>
+        <EditProfilePopup isOpen={isEditProfileOpen} onClose={closeAllPopups}/>
         <PopupWithForm
           name="add-form"
           title="Новое место"

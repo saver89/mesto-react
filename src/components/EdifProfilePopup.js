@@ -1,7 +1,17 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PopupWithForm from './PopupWithForm';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function isEditProfilePopup({isOpen, onClose}) {
+function EditProfilePopup({ isOpen, onClose }) {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const currentUser = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    setName(currentUser.name);
+    setDescription(currentUser.about);
+  }, [currentUser])
+
   return (
     <PopupWithForm
       name="edit-form"
@@ -17,6 +27,10 @@ function isEditProfilePopup({isOpen, onClose}) {
             id="input-edit-name"
             name="name"
             type="text"
+            value={name}
+            onChange={(evt) => {
+              setName(evt.target.value);
+            }}
             placeholder="Имя"
             minLength="2"
             maxLength="40"
@@ -33,6 +47,10 @@ function isEditProfilePopup({isOpen, onClose}) {
             className="popup__input"
             id="input-edit-position"
             name="about"
+            value={description}
+            onChange={(evt) => {
+              setDescription(evt.target.value);
+            }}
             type="text"
             placeholder="Род занятий"
             minLength="2"
@@ -49,4 +67,4 @@ function isEditProfilePopup({isOpen, onClose}) {
   );
 }
 
-export default isEditProfilePopup;
+export default EditProfilePopup;
