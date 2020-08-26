@@ -2,7 +2,7 @@ import React from 'react';
 
 function PopupWithForm(props) {
   return (
-    <div className={`popup popup_${props.name} ${props.isOpened && 'popup_opened'}`}>
+    <div className={`popup popup_${props.name} ${props.isOpened ? 'popup_opened' : ''}`}>
       <div className="popup__container">
         <button
           type="button"

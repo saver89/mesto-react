@@ -1,44 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import api from '../utils/Api';
+import React, { useContext } from 'react';
 import Card from './Card';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api.getInitialsCards().then((res) => {
-      setCards(res);
-    }).catch(err => {
-      console.error(err);
-    });
-  }, []);
-
-  const currentUser = useContext(CurrentUserContext);
-
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      // Обновляем стейт
-      setCards(newCards);
-    }).catch(err => {
-      console.error(err);
-    });
-  }
-
-  function handleCardDelete(card) {
-    api.removeCard(card._id).then(() => {
-      const newCards = cards.filter(c => c._id !== card._id);
-      setCards(newCards);
-    }).catch(err => {
-      console.error(err);
-    });
-  }
+  const currentUser = useContext(CurrentUserContext);  
 
   return (
     <main className="main">
@@ -71,13 +36,13 @@ function Main(props) {
         ></button>
       </section>
       <section className="elements">
-        {cards.map((card) => (
+        {props.cards.map((card) => (
           <Card
             card={card}
             key={card._id}
             onCardClick={props.onCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            onCardLike={props.onCardLike}
+            onCardDelete={props.onCardDelete}
           />
         ))}
       </section>
