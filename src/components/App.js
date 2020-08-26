@@ -92,6 +92,7 @@ function App() {
       .postCard(card)
       .then((newCard) => {
         setCards([...cards, newCard]);
+        setIsAddPlacePopupOpen(false);
       })
       .catch((err) => {
         console.error(err);
