@@ -9,6 +9,7 @@ import api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EdifProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -129,38 +130,7 @@ function App() {
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
-        <PopupWithForm
-          name="add-form"
-          title="Новое место"
-          closeText="Создать"
-          isOpened={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-        >
-          <fieldset className="popup__fieldset">
-            <label className="popup__form-field">
-              <input
-                className="popup__input"
-                name="name"
-                type="text"
-                placeholder="Название"
-                minLength="1"
-                maxLength="30"
-                required
-              />
-              <span className="popup__input-error"></span>
-            </label>
-            <label className="popup__form-field">
-              <input
-                className="popup__input"
-                name="link"
-                type="url"
-                placeholder="Ссылка на картинку"
-                required
-              />
-              <span className="popup__input-error"></span>
-            </label>
-          </fieldset>
-        </PopupWithForm>
+        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
