@@ -16,15 +16,18 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState();
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({ _id: '', name: '', avatar: '', about: '' });
   const [cards, setCards] = useState([]);
-  
+
   useEffect(() => {
-    api.getInitialsCards().then((res) => {
-      setCards(res);
-    }).catch(err => {
-      console.error(err);
-    });
+    api
+      .getInitialsCards()
+      .then((res) => {
+        setCards(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   useEffect(() => {
@@ -55,7 +58,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setSelectedCard(null);
   }
-  
+
   function handleUpdateUser(userInfo) {
     api
       .editUserInfo(userInfo)
@@ -64,8 +67,8 @@ function App() {
         updatedUser.name = userInfo.name;
         updatedUser.about = userInfo.about;
 
-        setCurrentUser({ ...updatedUser});
-        setIsEditProfileOpen(false);        
+        setCurrentUser({ ...updatedUser });
+        setIsEditProfileOpen(false);
       })
       .catch((err) => {
         console.err(err);
@@ -73,7 +76,6 @@ function App() {
   }
 
   function handleUpdateAvatar({ avatar }) {
-    console.log(avatar);
     api
       .editAvatar(avatar)
       .then((updatedUser) => {
@@ -85,28 +87,45 @@ function App() {
       });
   }
 
+  function handleAddPlaceSubmit(card) {
+    api
+      .postCard(card)
+      .then((newCard) => {
+        setCards([...cards, newCard]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
+
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
-      // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
-      const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
-      // Обновляем стейт
-      setCards(newCards);
-    }).catch(err => {
-      console.error(err);
-    });
+    api
+      .changeLikeCardStatus(card._id, !isLiked)
+      .then((newCard) => {
+        // Формируем новый массив на основе имеющегося, подставляя в него новую карточку
+        const newCards = cards.map((c) => (c._id === card._id ? newCard : c));
+        // Обновляем стейт
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   function handleCardDelete(card) {
-    api.removeCard(card._id).then(() => {
-      const newCards = cards.filter(c => c._id !== card._id);
-      setCards(newCards);
-    }).catch(err => {
-      console.error(err);
-    });
+    api
+      .removeCard(card._id)
+      .then(() => {
+        const newCards = cards.filter((c) => c._id !== card._id);
+        setCards(newCards);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   return (
@@ -130,7 +149,11 @@ function App() {
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
-        <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} />
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlace={handleAddPlaceSubmit}
+        />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
