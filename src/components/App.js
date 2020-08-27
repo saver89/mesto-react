@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
@@ -31,9 +30,14 @@ function App() {
   }, []);
 
   useEffect(() => {
-    api.getUserInfo().then((res) => {
-      setCurrentUser(res);
-    });
+    api
+      .getUserInfo()
+      .then((res) => {
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   function handleEditProfileClick() {
@@ -131,7 +135,7 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="App">
+      <div className="page">
         <div className="container">
           <Header />
           <Main
