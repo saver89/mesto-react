@@ -1,0 +1,24 @@
+@import url("./__field/sign-form__field.css");
+@import url("./__input-error/sign-form__input-error.css");
+@import url("./__input-error_active/sign-form__input-error_active.css");
+@import url("./__input/sign-form__input.css");
+@import url("./__submit-button/sign-form__submit-button.css");
+@import url("./__title/sign-form__title.css");
+@import url("./__bottom-container/sign-form__bottom-container.css");
+@import url("./__container/sign-form__container.css");
+@import url("./__transition-hint/sign-form__transition-hint.css");
+@import url("./__link/sign-form__link.css");
+
+.sign-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 159px);
+  padding: 0 30px 0;
+}
+
+@media screen and (max-width: 320px) {
+  .sign-form {
+    height: calc(100% - 112px);
+  }
+}
