@@ -1,0 +1,28 @@
+.sign-form__input {
+  height: 40px;
+  width: 100%;
+  color: #ccc;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  background: #000;
+}
+
+.sign-form__input:focus {
+  outline: none;
+}
+
+.sign-form__input:invalid:not(:placeholder-shown) {
+  border-color: #f00;
+}
+
+@media screen and (max-width:520px) {
+  .sign-form__input {
+    height: 36px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
